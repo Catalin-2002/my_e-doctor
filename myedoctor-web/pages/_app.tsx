@@ -3,6 +3,10 @@ import type { AppProps } from 'next/app';
 import { config } from '@fortawesome/fontawesome-svg-core';
 import { NextPage } from 'next';
 
+import '@/styles/globals.scss';
+import { SessionProvider } from 'next-auth/react';
+import { useState } from 'react';
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 
 config.autoAddCss = false;
 
@@ -13,11 +17,17 @@ const roboto = Roboto({
   variable: '--font-roboto',
 });
 
-
 const App = ({ Component, pageProps }: AppProps) => {
+  const [client] = useState(() => new QueryClient());
   const getLayout = (Component as NextPage & { getLayout: (page: JSX.Element) => JSX.Element }).getLayout || ((page) => page);
 
-  return <main className={`${roboto.variable} font-sans bg-white`}>{getLayout(<Component {...pageProps} />)}</main>;
-}
+  return (
+    <SessionProvider session={pageProps.session} refetchInterval={15 * 60}>
+      <QueryClientProvider client={client}>
+        <main className={`${roboto.variable} bg-white font-sans`}>{getLayout(<Component {...pageProps} />)}</main>;
+      </QueryClientProvider>
+    </SessionProvider>
+  );
+};
 
 export default App;
