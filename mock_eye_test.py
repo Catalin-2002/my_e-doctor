@@ -12,7 +12,7 @@ BASE_URL = "http://127.0.0.1:5000"  # Replace with your default IP
 class ImageAndAPIScript:
     def __init__(self):
         self.base_url = BASE_URL
-        self.userID = 1
+        self.userID = 3
         self.cap = cv2.VideoCapture(1)
 
         if not self.cap.isOpened():
@@ -25,6 +25,9 @@ class ImageAndAPIScript:
             self.create_test()
         elif command == 'NEXT':
             self.get_next_level_characters()
+        else: 
+            self.send_next_level_characters(command)
+
     
     def create_test(self):
         response = requests.post(f"{self.base_url}/snellen_test/start-test", json={'userID': self.userID})
@@ -32,7 +35,7 @@ class ImageAndAPIScript:
             test_id = response.json().get('testID')
             self.test_id = test_id
             print(f"Test created with ID {test_id}")
-            # self.start_send_image_thread()
+            self.start_send_image_thread()
         else:
             print("Error creating test")
 
@@ -45,8 +48,6 @@ class ImageAndAPIScript:
         if not ret:
             print("Error: Could not read frame from camera.")
             return
-        
-        print("Frame size:", frame.shape)
 
         # Convert the image to a JPEG format in memory
         _, buffer = cv2.imencode('.jpg', frame)
@@ -61,8 +62,6 @@ class ImageAndAPIScript:
         response = requests.post(f"{self.base_url}/snellen_test/update-camera-frame", 
                                  json={'testID': self.test_id, 'cameraFrame': image_as_base64_string})
 
-        print("Response status:", response.status_code)
-
         # Wait for 0.2 seconds before the next image
         time.sleep(0.2)
         self.send_image()
@@ -75,7 +74,14 @@ class ImageAndAPIScript:
         else:
             print("Error getting next level characters")
 
-    
+    def send_next_level_characters(self, predicted_characters):
+        predicted_characters = list(predicted_characters)
+        response = requests.post(f"{self.base_url}/snellen_test/send-current-level-results", json={'testID': self.test_id, 'currentLevelResults': predicted_characters})
+        if response.status_code == 200:
+            result = response.json()
+            print('Response from server', result) 
+        else:
+            print('Error receiving next level characters')
 
 # Main execution in a separate thread
 def main():
