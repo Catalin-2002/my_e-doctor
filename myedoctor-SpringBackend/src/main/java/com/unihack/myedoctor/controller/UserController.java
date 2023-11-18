@@ -2,7 +2,7 @@ package com.unihack.myedoctor.controller;
 
 import com.unihack.myedoctor.model.User;
 import com.unihack.myedoctor.service.UserService;
-import lombok.AllArgsConstructor;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -15,12 +15,12 @@ public class UserController {
     private final UserService userService;
 
     @PostMapping("/create")
-    public ResponseEntity<User> createUser(@RequestBody User user) {
+    public ResponseEntity<User> createUser(@Valid @RequestBody User user) {
         return ResponseEntity.ok(userService.createUser(user));
     }
 
     @PutMapping("/update/{userId}")
-    public ResponseEntity<User> updateUser(@PathVariable String userId, @RequestBody User user) {
+    public ResponseEntity<User> updateUser(@PathVariable String userId, @Valid @RequestBody User user) {
         return ResponseEntity.ok(userService.updateUserById(userId, user));
     }
 

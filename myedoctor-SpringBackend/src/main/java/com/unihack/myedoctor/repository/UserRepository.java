@@ -7,4 +7,5 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface UserRepository extends MongoRepository<User, String> {
 //    User updateUserById(String userId, User user);
+    User findUserByUserId(String userId);
 }
