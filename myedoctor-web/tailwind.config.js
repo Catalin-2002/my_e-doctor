@@ -8,12 +8,17 @@ module.exports = {
       backgroundImage: {
         'gradient-radial-button': 'linear-gradient(90deg, #FD267D 0%, #FF7854 100%)',
         'gradient-radial-basic': 'radial-gradient(51.22% 338.65% at 13.54% 67.5%, #EA5B6C 0%, #ed805d 100%)',
-        'gradient-radial': 'url(/images/ellipse-mask.png),radial-gradient(51.22% 338.65% at 13.54% 67.5%, #EA5B6C 0%, #ED805D 100%)',
-        'gradient-radial-mobile': 'url(/images/ellipse-mask-mobile.png),radial-gradient(51.22% 338.65% at 13.54% 67.5%, #eb6668 0%, #ED805D 100%)',
+        'gradient-radial':
+          'url(/images/ellipse-mask.png),radial-gradient(51.22% 338.65% at 13.54% 67.5%, #EA5B6C 0%, #ED805D 100%)',
+        'gradient-radial-mobile':
+          'url(/images/ellipse-mask-mobile.png),radial-gradient(51.22% 338.65% at 13.54% 67.5%, #eb6668 0%, #ED805D 100%)',
       },
       colors: {
         primary: '#4890E3',
-        green: '#83CB3D'
+        'prussian-blue': '#003153',
+        'neon-green': '#00FF00',
+        // 'mint-green':'#39FF14'
+        green: '#83CB3D',
       },
       aspectRatio: {
         banner: '3/1',
@@ -28,6 +33,9 @@ module.exports = {
       },
       boxShadow: {
         slider: '0 0 0 5px rgba(0, 0, 0, 0.3)',
+        'prussian-white': '0 12px 18px -6px rgba(0, 49, 83, 0.7), 0 8px 10px -7px rgba(255, 255, 255, 0.8)',
+        // Umbra personalizată
+
         DEFAULT: '0 0 1px 0 rgb(0, 0, 0, 0.3), 0 4px 6px -2px rgb(0, 0, 0, 0.25)',
       },
       keyframes: {
@@ -144,14 +152,14 @@ module.exports = {
         },
         'flash-animate': {
           '0%': {
-            left: '-30%'
+            left: '-30%',
           },
           '50%': {
-            left: '130%'
+            left: '130%',
           },
           '100%': {
-            left: '130%'
-          }
+            left: '130%',
+          },
         },
         // Progress bar
         progress: {
@@ -207,7 +215,7 @@ module.exports = {
         'content-show-dialog': 'content-show-dialog 0.15s cubic-bezier(0.16, 1, 0.3, 1)',
         // Static promo pages
         'slide-up-slow': 'toast-slide-in-bottom 1500ms cubic-bezier(0.4, 0, 0.2, 1)',
-        'flash': 'flash-animate 3000ms ease-in-out infinite',
+        flash: 'flash-animate 3000ms ease-in-out infinite',
       },
       zIndex: {
         60: '60',
