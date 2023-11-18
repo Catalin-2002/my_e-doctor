@@ -44,6 +44,7 @@ def get_next_level_characters():
     test_id = request.json.get('testID')
 
     try :
+        print ('test_id', test_id)
         next_level_characters = snellen_test_service.get_next_level_characters(test_id)
         return jsonify(next_level_characters), 200
     except Exception as e:

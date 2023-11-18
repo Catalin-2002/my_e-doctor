@@ -23,6 +23,8 @@ class ImageAndAPIScript:
     def handle_command(self, command):
         if command == 'CT':
             self.create_test()
+        elif command == 'NEXT':
+            self.get_next_level_characters()
     
     def create_test(self):
         response = requests.post(f"{self.base_url}/snellen_test/start-test", json={'userID': self.userID})
@@ -30,7 +32,7 @@ class ImageAndAPIScript:
             test_id = response.json().get('testID')
             self.test_id = test_id
             print(f"Test created with ID {test_id}")
-            self.start_send_image_thread()
+            # self.start_send_image_thread()
         else:
             print("Error creating test")
 
@@ -64,6 +66,14 @@ class ImageAndAPIScript:
         # Wait for 0.2 seconds before the next image
         time.sleep(0.2)
         self.send_image()
+
+    def get_next_level_characters(self):
+        response = requests.get(f"{self.base_url}/snellen_test/get-next-level-characters", json={'testID': self.test_id})
+        if response.status_code == 200:
+            characters = response.json()
+            print("Next level characters:", characters)
+        else:
+            print("Error getting next level characters")
 
     
 

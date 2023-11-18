@@ -5,8 +5,8 @@ class SnellenTestInstance:
         self.test_id = uuid.uuid4()
         self.user_id = user_id
         self.is_first_eye_done = False
-        self.current_level = -1
-        self.number_of_correct = 0
+        self.current_level = 0
+        self.current_level_characters = []
         self.has_previously_failed = False
         self.last_camera_frame_update = None
         self.last_camera_frame_distance = None
@@ -33,6 +33,9 @@ class SnellenTestInstance:
     def get_final_score(self):
         return self.final_score
     
+    def get_current_level_characters(self):
+        return self.current_level_characters
+    
     def set_test_id(self, test_id):
         self.test_id = test_id
     
@@ -53,3 +56,6 @@ class SnellenTestInstance:
 
     def set_final_score(self, final_score):
         self.final_score = final_score
+
+    def set_current_level_characters(self, current_level_characters):
+        self.current_level_characters = current_level_characters
