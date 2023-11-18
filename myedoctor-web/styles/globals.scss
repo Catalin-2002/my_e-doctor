@@ -73,4 +73,28 @@ a {
   --space-4: 8px;
   --space-5: 12px;
   --space-6: 16px;
+
+  --primary-scroll: #f1f1f1;
+  --secondary-scroll: #00c0ff;
+  --tertiary-scroll: #00bfff77;
+}
+
+/* Chrome, Edge, and Safari */
+*::-webkit-scrollbar {
+  width: 15px;
+}
+
+*::-webkit-scrollbar-track {
+  background: var(--primary-scroll);
+  border-radius: 7px;
+}
+
+*::-webkit-scrollbar-thumb {
+  background-color: var(--primary-scroll);
+  border-radius: 14px;
+  border: 3px solid var(--primary-scroll);
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background-color: var(--tertiary-scroll);
 }

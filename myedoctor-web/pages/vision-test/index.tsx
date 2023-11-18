@@ -33,7 +33,7 @@ export const getServerSideProps = async (context: GetServerSidePropsContext) => 
 
   return {
     props: {
-      title: 'MyeDoctor - Vision Test',
+      title: 'My E-Doctor - Vision Test',
     },
   };
 };

@@ -9,11 +9,11 @@ import Loader from '../Loader/Loader';
 import { useQuery } from '@tanstack/react-query';
 import { getOccupations } from '@/src/utils/queries/occupations';
 import Form from '../Form/Form';
-import Image from 'next/image';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faUser } from '@fortawesome/free-regular-svg-icons';
 
-const UserProfile: React.FC = () => {
+import UserPicture from '../UserPicture/UserPicture';
+import { User } from '@/src/types/user';
+
+const UserProfile = () => {
   const { user, isLoading, isUpdateLoading } = useUser();
   const { data: occupations, isLoading: occupationsLoading } = useQuery({
     queryKey: ['occupations'],
@@ -40,7 +40,7 @@ const UserProfile: React.FC = () => {
     );
   }
 
-  // if (!user) return null;
+  if (!user) return null;
 
   const triggerUserUpdate = (data: typeof userSchema._type) => {
     updateUser({ ...data, userId: user?.userId || '' });
@@ -51,15 +51,7 @@ const UserProfile: React.FC = () => {
 
   return (
     <div className="flex min-h-screen w-full gap-5 p-10">
-      {
-        <div className="relative flex h-[200px] min-w-[200px] items-center justify-center rounded-full bg-prussian-blue">
-          {user.imageLocation ? (
-            <Image src={user.imageLocation} alt="user-image" className="h-full w-full rounded-full" fill />
-          ) : (
-            <FontAwesomeIcon icon={faUser} className="text-[74px] text-white" />
-          )}
-        </div>
-      }
+      <UserPicture />
       <Form form={form} onSubmit={(data) => triggerUserUpdate(data)} className="flex flex-col gap-4 p-4">
         <h2 className="mb-4 text-2xl font-semibold text-neon-green">Welcome to MyE-Doctor, User!</h2>
         <p className="mb-5 text-lg">Please, complete the following form with your personal details:</p>

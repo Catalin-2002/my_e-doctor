@@ -4,7 +4,7 @@ import { tv, VariantProps } from 'tailwind-variants';
 interface ButtonProps extends ComponentPropsWithoutRef<'button'>, VariantProps<typeof buttonStyle> {}
 
 const buttonStyle = tv({
-  base: 'flex items-center justify-center tracking-[1.25px] rounded-md px-4 py-2 focus:outline-none focus:ring text-white font-normal',
+  base: 'flex items-center justify-center tracking-[1.25px] rounded-md px-4 py-2 focus:outline-none focus:border-transparent focus:ring text-white font-normal',
   variants: {
     intent: {
       primary: 'bg-green hover:bg-[#498F01] border-transparent',
