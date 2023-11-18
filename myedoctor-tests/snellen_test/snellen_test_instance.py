@@ -4,6 +4,7 @@ class SnellenTestInstance:
     def __init__(self, user_id):
         self.test_id = uuid.uuid4()
         self.user_id = user_id
+        self.is_first_eye_done = False
         self.current_level = -1
         self.number_of_correct = 0
         self.has_previously_failed = False

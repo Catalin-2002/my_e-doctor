@@ -1,2 +1,4 @@
 # Ignore any pycache occurence
 global-exclude __pycache__
+# Ignore any venv
+global-exclude venv
