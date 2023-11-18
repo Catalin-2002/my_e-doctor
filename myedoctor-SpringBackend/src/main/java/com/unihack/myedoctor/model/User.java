@@ -20,27 +20,22 @@ import java.time.LocalDate;
 @Builder
 public class User {
     @Id
-    private String id;
+    private String userId;
 
     @NonNull
     @Email(message = "Email should be valid")
     private String email;
 
     @NonNull
-    @Size(min = 3, max = 15, message = "Firstname must be between 3 and 15 characters")
     private String firstName;
 
     @NonNull
-    @Size(min = 3, max = 15, message = "Lastname must be between 3 and 15 characters")
     private String lastName;
 
-    @NonNull
     private Location location;
 
-    @NonNull
     @JsonFormat(timezone = "yyyy-MM-dd")
     private LocalDate dateOfBirth;
 
-    @NonNull
     private OccupationField occupationField;
 }

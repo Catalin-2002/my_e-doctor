@@ -1,5 +1,6 @@
 package com.unihack.myedoctor.service;
 
+import com.unihack.myedoctor.exception.UserAlreadyExistsException;
 import com.unihack.myedoctor.exception.UserNotFoundException;
 import com.unihack.myedoctor.model.User;
 import com.unihack.myedoctor.repository.UserRepository;
@@ -17,8 +18,12 @@ public class UserServiceImpl implements UserService{
 
     @Override
     public User createUser(User user) {
+        if (userRepository.findUserByUserId(user.getUserId()) != null) {
+            throw new UserAlreadyExistsException("User with id: " + user.getUserId() + " already exists");
+        }
         return userRepository.save(user);
     }
+
 
     @Override
     public User updateUserById(String userId, User updatedUser) {
