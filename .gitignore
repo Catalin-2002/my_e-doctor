@@ -1,0 +1,2 @@
+# Ignore any pycache occurence
+global-exclude __pycache__
