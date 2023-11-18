@@ -1,4 +1,4 @@
-import { Location, Occupation, User } from '@/src/types/user';
+import { Location, OccupationField, User } from '@/src/types/user';
 import { put, request } from './queryClient';
 
 export type UserUpdatePayload = {
@@ -6,7 +6,8 @@ export type UserUpdatePayload = {
   firstName?: string;
   lastName?: string;
   location?: Location;
-  occupation?: Occupation;
+  dateOfBirth?: number;
+  occupation?: OccupationField;
 };
 
 const getUser = async (userId: string) => {

@@ -3,7 +3,7 @@ import Button from '@/src/components/Button/Button';
 import { GetServerSidePropsContext } from 'next/types';
 import useSession from '@/src/hooks/useSession';
 import Loader from '@/src/components/Loader/Loader';
-import { redirectAuthenticated, redirectUnauthenticated } from '@/src/helpers/session';
+import { redirectAuthenticated } from '@/src/helpers/session';
 import { getLayout } from '@/src/components/Layout/Layout';
 
 const HomePage = () => {
@@ -37,7 +37,6 @@ HomePage.getLayout = getLayout;
 
 export const getServerSideProps = async (context: GetServerSidePropsContext) => {
   const redirect = await redirectAuthenticated(context);
-  console.log(redirect);
 
   if (redirect) return redirect;
 
