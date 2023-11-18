@@ -16,7 +16,7 @@ const SymptomTextInput = ({ onTrigger }: SymptomTextInputProps) => {
     setInputValue(event.target.value);
   };
 
-  const triggerInvestigation = () => {
+  const triggerInvestigation = async () => {
     if (isTriggerDisabled) return;
 
     onTrigger(inputValue);
@@ -28,15 +28,12 @@ const SymptomTextInput = ({ onTrigger }: SymptomTextInputProps) => {
         name="investigationText"
         value={inputValue}
         onChange={handleChange}
-        placeholder="Tell us what your problem is..."
+        placeholder="What concerns you?"
         sufixEl={() => (
           <FontAwesomeIcon
             onClick={triggerInvestigation}
             icon={faCircleRight}
-            className={twMerge(
-              'top-2 cursor-pointer text-[24px]',
-              isTriggerDisabled ? 'text-gray-400' : 'cursor-pointer text-blue-600'
-            )}
+            className={twMerge('top-2 text-[24px]', isTriggerDisabled ? 'text-gray-400' : 'cursor-pointer text-blue-600')}
           />
         )}
         className="justify-center"

@@ -17,10 +17,10 @@ const Layout = ({ children, title }: PropsWithChildren<LayoutProps>) => {
           <title>{title}</title>
         </Head>
       )}
-      <div className="flex min-h-[100vh] flex-col justify-between">
+      <div className="flex flex-col justify-between">
         <div className="flex h-full w-full grow">
           {pathname !== '/' && <SideMenu />}
-          <div className="flex min-h-[100vh] w-full grow">{children}</div>
+          <div className="flex w-full grow">{children}</div>
         </div>
       </div>
     </>

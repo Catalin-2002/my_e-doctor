@@ -23,6 +23,7 @@
     "react-hook-form": "^7.44.3",
     "autoprefixer": "^10.4.16",
     "axios": "^1.2.2",
+    "jotai": "^2.0.2",
     "cookies-next": "^2.1.1",
     "eslint": "8.32.0",
     "eslint-config-next": "13.1.2",

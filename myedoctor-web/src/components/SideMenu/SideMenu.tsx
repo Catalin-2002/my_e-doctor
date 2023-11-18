@@ -19,8 +19,12 @@ const SideMenu = () => {
             <FontAwesomeIcon className="text-[18px]" icon={faCircleQuestion} />
           </Button>
         </div>
-        <Link href="/profile">Profile</Link>
-        <Link href="/history">History</Link>
+        <Link className="text-lg" href="/profile">
+          Profile
+        </Link>
+        <Link className="text-lg" href="/history">
+          History
+        </Link>
       </div>
       <div className="flex flex-col gap-2">
         <Button onClick={signOut} intent="text" className="text-md justify-start">
