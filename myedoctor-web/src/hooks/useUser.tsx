@@ -1,7 +1,8 @@
-import { getUser, updateUser } from '@utils/queries/user';
+import { createUser, getUser, updateUser } from '@utils/queries/user';
 import { useSession } from 'next-auth/react';
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import { toast } from 'react-toastify';
+import { useEffect } from 'react';
 
 const useUser = () => {
   const { data: session } = useSession();
@@ -11,6 +12,7 @@ const useUser = () => {
     queryKey: ['user', session?.user.userId],
     queryFn: () => getUser(session?.user.userId!),
     enabled: !!session?.user.userId,
+    refetchOnWindowFocus: false,
   });
 
   const {
@@ -33,7 +35,26 @@ const useUser = () => {
       });
     },
   });
-  return { user, isLoading, updateUser: mutate, isUpdateLoading, error };
+
+  const { mutate: createUserMutate } = useMutation({
+    mutationFn: createUser,
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ['user'] });
+    },
+  });
+
+  useEffect(() => {
+    if (session?.user && !isLoading) {
+      createUserMutate({
+        userId: session.user.userId,
+        email: session.user.email,
+        firstName: session.user.name?.split(' ')[0],
+        lastName: session.user.name?.split(' ')[1],
+      });
+    }
+  }, [session, isLoading]);
+
+  return { user: { ...user, imageLocation: session?.user.image }, isLoading, updateUser: mutate, isUpdateLoading, error };
 };
 
 export default useUser;

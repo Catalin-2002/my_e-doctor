@@ -15,7 +15,7 @@ export default async (req: NextApiRequest, res: NextApiResponse) =>
     pathRewrite: [
       {
         patternStr: '^/api/service',
-        replaceStr: '/api',
+        replaceStr: '/api/v1',
       },
     ],
     xfwd: false,

@@ -3,17 +3,33 @@ import TextInput from '../TextInput/TextInput';
 import { useZodForm } from '@/src/hooks/useZodForm';
 import { userSchema } from '@/src/schemas/user';
 import useUser from '@/src/hooks/useUser';
-import { Form } from 'react-hook-form';
+
 import { updateUser } from '@/src/utils/queries/user';
 import Loader from '../Loader/Loader';
 import { useQuery } from '@tanstack/react-query';
 import { getOccupations } from '@/src/utils/queries/occupations';
+import Form from '../Form/Form';
+import Image from 'next/image';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faUser } from '@fortawesome/free-regular-svg-icons';
 
 const UserProfile: React.FC = () => {
   const { user, isLoading, isUpdateLoading } = useUser();
   const { data: occupations, isLoading: occupationsLoading } = useQuery({
     queryKey: ['occupations'],
     queryFn: () => getOccupations(),
+  });
+
+  const form = useZodForm({
+    schema: userSchema,
+    mode: 'onChange',
+    defaultValues: {
+      email: user?.email || '',
+      firstName: user?.firstName || '',
+      lastName: user?.lastName || '',
+      dateOfBirth: user?.dateOfBirth || Date.now(),
+      occupation: user?.occupationField,
+    },
   });
 
   if (isLoading || occupationsLoading || isUpdateLoading) {
@@ -24,27 +40,27 @@ const UserProfile: React.FC = () => {
     );
   }
 
-  if (!user) return null;
+  // if (!user) return null;
 
-  const triggerUserUpdate = (data: typeof userSchema) => {
-    updateUser({ ...data, userId: user.userId });
+  const triggerUserUpdate = (data: typeof userSchema._type) => {
+    updateUser({ ...data, userId: user?.userId || '' });
     // TODO: add location field to current location
   };
 
-  const form = useZodForm({
-    schema: userSchema,
-    mode: 'onChange',
-    defaultValues: {
-      firstName: user?.firstName || '',
-      lastName: user?.lastName || '',
-      dateOfBirth: user?.dateOfBirth || Date.now(),
-      occupation: user.occupation as string,
-    },
-  });
+  const { isValid } = form.formState;
 
   return (
-    <div className="flex min-h-screen w-full flex-col">
-      <Form form={form} onSubmit={triggerUserUpdate} className="gap-4 p-4">
+    <div className="flex min-h-screen w-full gap-5 p-10">
+      {
+        <div className="relative flex h-[200px] min-w-[200px] items-center justify-center rounded-full bg-prussian-blue">
+          {user.imageLocation ? (
+            <Image src={user.imageLocation} alt="user-image" className="h-full w-full rounded-full" fill />
+          ) : (
+            <FontAwesomeIcon icon={faUser} className="text-[74px] text-white" />
+          )}
+        </div>
+      }
+      <Form form={form} onSubmit={(data) => triggerUserUpdate(data)} className="flex flex-col gap-4 p-4">
         <h2 className="mb-4 text-2xl font-semibold text-neon-green">Welcome to MyE-Doctor, User!</h2>
         <p className="mb-5 text-lg">Please, complete the following form with your personal details:</p>
 
@@ -78,10 +94,9 @@ const UserProfile: React.FC = () => {
           </label>
           <TextInput
             readOnly
-            name="email"
             type="email"
             placeholder="Email"
-            value={user.email}
+            {...form.register('email')}
             inputClassname="w-full rounded-md border p-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
           />
         </div>
