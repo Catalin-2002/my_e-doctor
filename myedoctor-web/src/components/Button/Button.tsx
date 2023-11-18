@@ -1,40 +1,27 @@
-// components/Button.tsx
-
 import React, { ComponentPropsWithoutRef } from 'react';
-import { twMerge } from 'tailwind-merge';
+import { tv, VariantProps } from 'tailwind-variants';
 
-interface ButtonProps extends ComponentPropsWithoutRef<'button'> {
-  variant?: 'primary' | 'secondary' | 'tertiary';
-}
+interface ButtonProps extends ComponentPropsWithoutRef<'button'>, VariantProps<typeof buttonStyle> {}
 
-const Button = ({ variant = 'primary', className = '', children, ...props }: ButtonProps) => {
-  let variantClasses = '';
+const buttonStyle = tv({
+  base: 'flex items-center justify-center tracking-[1.25px] rounded-md px-4 py-2 focus:outline-none focus:ring text-white font-normal',
+  variants: {
+    intent: {
+      primary: 'bg-green hover:bg-[#498F01] border-transparent',
+      secondary: 'bg-blue-600 hover:bg-[#4890E3] border-transparent',
+      tertiary: 'bg-gray hover:bg-gray-900 border-transparent',
+      text: 'px-0 h-4 self-center text-sm leading-4 text-gray-100 hover:text-gray-400 tracking-normal',
+    },
+  },
+  defaultVariants: {
+    intent: 'primary',
+  },
+});
 
-  switch (variant) {
-    case 'primary':
-      variantClasses = 'bg-green text-white';
-      break;
-    case 'secondary':
-      variantClasses = 'bg-blue-500 text-white';
-      break;
-    case 'tertiary':
-      variantClasses = 'bg-gray-500 text-white';
-      break;
-    default:
-      break;
-  }
-
-  return (
-    <button
-      className={twMerge(
-        `rounded-md px-4 py-2 focus:outline-none focus:ring focus:border-${variant}-300 hover:bg-${variant}-600 ${variantClasses}`,
-        className
-      )}
-      {...props}
-    >
-      {children}
-    </button>
-  );
-};
+const Button = ({ className, intent, ...props }: ButtonProps) => (
+  <button {...props} className={buttonStyle({ intent, className })}>
+    {props.children}
+  </button>
+);
 
 export default Button;

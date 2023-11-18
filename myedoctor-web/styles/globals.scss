@@ -43,6 +43,10 @@ a {
   @include removeTapHighlight;
   color: inherit;
   text-decoration: none;
+
+  &:hover {
+    @apply text-white;
+  }
 }
 
 :root {

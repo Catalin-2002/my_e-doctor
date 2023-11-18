@@ -31,7 +31,7 @@ const UserProfile: React.FC = () => {
               placeholder="Last Name"
               value={lastName}
               onChange={(e) => setLastName(e.target.value)}
-              className="w-full rounded-md border p-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
+              inputClassname="w-full rounded-md border p-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
             />
           </div>
 
@@ -44,7 +44,7 @@ const UserProfile: React.FC = () => {
               placeholder="First Name"
               value={firstName}
               onChange={(e) => setFirstName(e.target.value)}
-              className="w-full rounded-md border p-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
+              inputClassname="w-full rounded-md border p-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
             />
           </div>
 
@@ -58,7 +58,7 @@ const UserProfile: React.FC = () => {
               placeholder="Email"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
-              className="w-full rounded-md border p-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
+              inputClassname="w-full rounded-md border p-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
             />
           </div>
 
@@ -71,7 +71,7 @@ const UserProfile: React.FC = () => {
               placeholder="Location"
               value={location}
               onChange={(e) => setLocation(e.target.value)}
-              className="w-full rounded-md border p-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
+              inputClassname="w-full rounded-md border p-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
             />
           </div>
 
@@ -85,7 +85,7 @@ const UserProfile: React.FC = () => {
               placeholder="Date of Birth"
               value={dateOfBirth}
               onChange={(e) => setDateOfBirth(e.target.value)}
-              className="w-full rounded-md border p-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
+              inputClassname="w-full rounded-md border p-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
             />
           </div>
 
