@@ -1,6 +1,7 @@
 import NextAuth from 'next-auth';
 import CognitoProvider from 'next-auth/providers/cognito';
 import jwt_decode from 'jwt-decode';
+import { post } from '@/src/utils/queries/queryClient';
 
 export default NextAuth({
   providers: [
@@ -46,6 +47,11 @@ export default NextAuth({
       }
 
       return session;
+    },
+    async signIn({ user, profile }) {
+      post({ url: `${process.env.API_SERVER_URL}/api/v1/user/create`, body: { userId: profile?.sub, email: user.email } });
+
+      return true;
     },
   },
   secret: process.env.SECRET,

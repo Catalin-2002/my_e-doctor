@@ -3,7 +3,8 @@ spring:
     name: My-eDoctor-App-User-Service
   data:
     mongodb:
-      uri: mongodb+srv://serbantiurbe:bPU95cmnWTZPSToC@my-edoctor-db.qlgx1tb.mongodb.net/?retryWrites=true&w=majority
-      database: My-eDoctor-DB
+        uri: mongodb://localhost:27017/my-edoctor-db
+#      uri: mongodb+srv://serbantiurbe:bPU95cmnWTZPSToC@my-edoctor-db.qlgx1tb.mongodb.net/?retryWrites=true&w=majority
+#      database: My-eDoctor-DB
 server:
   port: 8081

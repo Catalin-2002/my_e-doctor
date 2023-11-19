@@ -1,67 +1,55 @@
-import React, { useRef, useState, useCallback } from 'react';
+import { characterSizeAtom, testIdAtom } from '@/src/utils/atoms';
+import { updateCameraFrame } from '@/src/utils/queries/vision';
+import { useAtomValue, useSetAtom } from 'jotai';
+import React, { useRef, useCallback, useEffect } from 'react';
 import Webcam from 'react-webcam';
 
 const WebcamStreamCapture: React.FC = () => {
   const webcamRef = useRef<Webcam>(null);
-  const mediaRecorderRef = useRef<MediaRecorder | null>(null);
-  const [capturing, setCapturing] = useState(false);
-  const [recordedChunks, setRecordedChunks] = useState<BlobPart[]>([]);
+  const setCharacterSize = useSetAtom(characterSizeAtom);
+  const testId = useAtomValue(testIdAtom);
 
-  const handleStartCaptureClick = useCallback(() => {
-    setCapturing(true);
+  const captureAndProcessFrame = useCallback(() => {
+    let capturedImage = undefined;
+
     if (webcamRef.current) {
-      mediaRecorderRef.current = new MediaRecorder(webcamRef.current.stream as MediaStream, {
-        mimeType: 'video/webm',
-      });
-      mediaRecorderRef.current.addEventListener('dataavailable', handleDataAvailable);
-      mediaRecorderRef.current.start();
-    }
-  }, [webcamRef, setCapturing, mediaRecorderRef]);
+      const imageSrc = webcamRef.current.getScreenshot();
+      if (imageSrc) {
+        const img = new Image();
+        img.onload = () => {
+          const canvas = document.createElement('canvas');
+          canvas.width = img.width;
+          canvas.height = img.height;
+          const ctx = canvas.getContext('2d');
 
-  const handleDataAvailable = useCallback(
-    ({ data }: { data: BlobPart }) => {
-      if (data.toString().length > 0) {
-        setRecordedChunks((prev) => [...prev, data]);
+          if (!ctx) return;
+          ctx.drawImage(img, 0, 0);
+
+          capturedImage = canvas.toDataURL();
+          if (capturedImage && testId) {
+            updateCameraFrame({ testId, cameraFrame: capturedImage })
+              .catch((err) => console.error(err))
+              .then((data) => {
+                data && setCharacterSize(data.levelSize);
+              });
+          }
+        };
+
+        img.src = imageSrc;
       }
-    },
-    [setRecordedChunks]
-  );
-
-  const handleStopCaptureClick = useCallback(() => {
-    if (mediaRecorderRef.current) {
-      mediaRecorderRef.current.stop();
-      setCapturing(false);
     }
-  }, [mediaRecorderRef, setCapturing]);
+    return capturedImage;
+  }, [webcamRef, testId]);
 
-  const handleDownload = useCallback(() => {
-    if (recordedChunks.length) {
-      const blob = new Blob(recordedChunks, {
-        type: 'video/webm',
-      });
-      const url = URL.createObjectURL(blob);
-      const a = document.createElement('a');
-      document.body.appendChild(a);
-      a.style.display = 'none';
-      a.href = url;
-      a.download = 'react-webcam-stream-capture.webm';
-      a.click();
-      window.URL.revokeObjectURL(url);
-      setRecordedChunks([]);
-    }
-  }, [recordedChunks]);
+  useEffect(() => {
+    const checkInterval = setInterval(() => {
+      captureAndProcessFrame();
+    }, 300);
 
-  return (
-    <div className="">
-      <Webcam height={200} width={400} audio={false} ref={webcamRef} />
-      {capturing ? (
-        <button onClick={handleStopCaptureClick}>Stop Capture</button>
-      ) : (
-        <button onClick={handleStartCaptureClick}>Start Capture</button>
-      )}
-      {recordedChunks.length > 0 && <button onClick={handleDownload}>Download</button>}
-    </div>
-  );
+    return () => clearInterval(checkInterval);
+  }, [testId]);
+
+  return <Webcam height={200} width={400} audio={false} ref={webcamRef} className="align-end" />;
 };
 
 export default WebcamStreamCapture;

@@ -11,4 +11,5 @@ export type User = {
   occupationField?: string;
   dateOfBirth?: number;
   email: string | null;
+  imageLocation?: string | null;
 };

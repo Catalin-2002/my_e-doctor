@@ -15,4 +15,12 @@ public class UserExceptionHandler {
                 HttpStatus.BAD_REQUEST);
         return new ResponseEntity<>(userException, HttpStatus.BAD_REQUEST);
     }
+
+    @ExceptionHandler(value = {UserAlreadyExistsException.class})
+    public ResponseEntity<Object> userAlreadyExistsException(UserAlreadyExistsException userAlreadyExistsException) {
+        UserException userException = new UserException(
+                userAlreadyExistsException.getMessage(),
+                HttpStatus.BAD_REQUEST);
+        return new ResponseEntity<>(userException, HttpStatus.BAD_REQUEST);
+    }
 }

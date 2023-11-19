@@ -1,17 +1,16 @@
-import { createUser, getUser, updateUser } from '@utils/queries/user';
+import { getUser, updateUser } from '@utils/queries/user';
 import { useSession } from 'next-auth/react';
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import { toast } from 'react-toastify';
-import { useEffect } from 'react';
 
 const useUser = () => {
   const { data: session } = useSession();
   const queryClient = useQueryClient();
 
-  const { data: user, isLoading } = useQuery({
-    queryKey: ['user', session?.user.userId],
+  const { data: userFetched, isLoading } = useQuery({
+    queryKey: ['user'],
     queryFn: () => getUser(session?.user.userId!),
-    enabled: !!session?.user.userId,
+    enabled: !!session?.user,
     refetchOnWindowFocus: false,
   });
 
@@ -22,7 +21,7 @@ const useUser = () => {
   } = useMutation({
     mutationFn: updateUser,
     onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ['user', user?.userId] });
+      queryClient.invalidateQueries({ queryKey: ['user'] });
       toast.success('Profile successfully updated!', {
         position: 'top-right',
         autoClose: 5000,
@@ -36,25 +35,7 @@ const useUser = () => {
     },
   });
 
-  const { mutate: createUserMutate } = useMutation({
-    mutationFn: createUser,
-    onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ['user'] });
-    },
-  });
-
-  useEffect(() => {
-    if (session?.user && !isLoading) {
-      createUserMutate({
-        userId: session.user.userId,
-        email: session.user.email,
-        firstName: session.user.name?.split(' ')[0],
-        lastName: session.user.name?.split(' ')[1],
-      });
-    }
-  }, [session, isLoading]);
-
-  return { user: { ...user, imageLocation: session?.user.image }, isLoading, updateUser: mutate, isUpdateLoading, error };
+  return { user: { ...userFetched, imageLocation: session?.user.image }, isLoading, updateUser: mutate, isUpdateLoading, error };
 };
 
 export default useUser;

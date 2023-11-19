@@ -1,6 +1,9 @@
 package com.unihack.myedoctor.service;
 
+import com.unihack.myedoctor.exception.HealthReportNotFoundException;
+import com.unihack.myedoctor.exception.UserAlreadyExistsException;
 import com.unihack.myedoctor.exception.UserNotFoundException;
+import com.unihack.myedoctor.model.HealthReport;
 import com.unihack.myedoctor.model.User;
 import com.unihack.myedoctor.repository.UserRepository;
 import lombok.AllArgsConstructor;
@@ -17,8 +20,12 @@ public class UserServiceImpl implements UserService{
 
     @Override
     public User createUser(User user) {
+        if (userRepository.findUserByUserId(user.getUserId()) != null) {
+            throw new UserAlreadyExistsException("User with id: " + user.getUserId() + " already exists");
+        }
         return userRepository.save(user);
     }
+
 
     @Override
     public User updateUserById(String userId, User updatedUser) {
@@ -31,6 +38,11 @@ public class UserServiceImpl implements UserService{
             user.setOccupationField(user.getOccupationField());
             return userRepository.save(user);
         }).orElseThrow(() -> new UserNotFoundException("User with id: " + userId + "not found"));
+    }
+
+    @Override
+    public User getUserById(String userId) {
+        return userRepository.findById(userId).orElseThrow(() -> new HealthReportNotFoundException("User with id: " + userId + "not found"));
     }
 
     @Override

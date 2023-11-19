@@ -1,4 +1,4 @@
-import React, { PropsWithChildren } from 'react';
+import React, { PropsWithChildren, ReactNode } from 'react';
 import Head from 'next/head';
 import { useRouter } from 'next/router';
 import SideMenu from '../SideMenu/SideMenu';
@@ -19,7 +19,7 @@ const Layout = ({ children, title }: PropsWithChildren<LayoutProps>) => {
       <div className="flex min-h-[100vh] flex-col justify-between">
         <div className="flex h-full w-full grow">
           {pathname !== '/' && <SideMenu />}
-          <div className="flex min-h-[100vh] w-full grow">{children}</div>
+          <div className="flex w-full grow">{children}</div>
         </div>
       </div>
     </>

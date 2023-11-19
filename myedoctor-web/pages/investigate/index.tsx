@@ -20,7 +20,7 @@ export const getServerSideProps = async (context: GetServerSidePropsContext) => 
 
   return {
     props: {
-      title: 'MyeDoctor - investigate',
+      title: 'My E-Doctor - investigate',
     },
   };
 };
