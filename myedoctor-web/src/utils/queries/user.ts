@@ -18,7 +18,7 @@ const getUser = async (userId: string) => {
 
 const updateUser = async (payload: UserUpdatePayload) => {
   return await put({
-    url: `/api/service/update/user/${payload.userId}`,
+    url: `/api/service/user/update/${payload.userId}`,
     body: payload,
   });
 };

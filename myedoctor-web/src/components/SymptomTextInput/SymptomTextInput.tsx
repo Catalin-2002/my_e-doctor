@@ -29,6 +29,11 @@ const SymptomTextInput = ({ onTrigger }: SymptomTextInputProps) => {
         value={inputValue}
         onChange={handleChange}
         placeholder="What concerns you?"
+        onKeyDown={(event) => {
+          if (event.key === 'Enter') {
+            triggerInvestigation();
+          }
+        }}
         sufixEl={() => (
           <FontAwesomeIcon
             onClick={triggerInvestigation}
@@ -38,7 +43,6 @@ const SymptomTextInput = ({ onTrigger }: SymptomTextInputProps) => {
         )}
         className="justify-center"
         sufixClassname="top-1.5 right-3"
-        inputClassname="focus:shadow-outline w-full appearance-none rounded border px-3 py-2 leading-tight text-gray-700 shadow focus:outline-none"
       />
     </div>
   );

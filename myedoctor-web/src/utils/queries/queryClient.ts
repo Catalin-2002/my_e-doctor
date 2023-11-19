@@ -55,14 +55,14 @@ export const request = async ({ url, params, isServer }: Request) => {
       },
       headers,
     })
-    .then((res) => res.data.data);
+    .then((res) => res.data);
 };
 
 export const post = async ({ url, body }: PostRequest) => {
   const headers = {
     'Content-Type': 'application/json',
   };
-  return await axios.post(url, body, { headers, data: {} }).then((res) => res.data.data);
+  return await axios.post(url, body, { headers, data: {} }).then((res) => res.data);
 };
 
 export const put = async ({ url, body, headers }: PostRequest) => {
@@ -70,12 +70,12 @@ export const put = async ({ url, body, headers }: PostRequest) => {
     'Content-Type': 'application/json',
     ...headers,
   };
-  return await axios.put(url, body, { headers, data: {} }).then((res) => res.data.data);
+  return await axios.put(url, body, { headers, data: {} }).then((res) => res.data);
 };
 
 export const deleteRequest = async ({ url }: DeleteRequest) => {
   const headers = {
     'Content-Type': 'application/json',
   };
-  return await axios.delete(url, { headers, data: {} }).then((res) => res.data.data);
+  return await axios.delete(url, { headers, data: {} }).then((res) => res.data);
 };

@@ -9,7 +9,7 @@ class SnellenTestInstance:
         self.current_level_characters = []
         self.has_previously_failed = False
         self.last_camera_frame_update = None
-        self.last_camera_frame_distance = None
+        self.last_camera_frame_distance = 100
         self.final_score = -1
 
     def get_test_id(self):

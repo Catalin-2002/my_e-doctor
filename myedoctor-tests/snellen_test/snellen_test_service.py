@@ -45,6 +45,7 @@ class SnellenTestService:
 
         # Check how many instances are the same
         correct_characters = 0
+        print('Here', desired_characters, current_level_results)
         for i in range(len(desired_characters)):
             if desired_characters[i] == current_level_results[i]:
                 correct_characters += 1

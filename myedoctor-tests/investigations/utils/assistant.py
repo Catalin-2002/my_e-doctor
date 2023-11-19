@@ -7,7 +7,7 @@ MODEL = "gpt-4-1106-preview"
 class Assistant:
   def __init__(self) -> None:
     openai_api_key = os.environ.get('OPEN_AI_KEY')
-    self.client = OpenAI(api_key=openai_api_key)
+    self.client = OpenAI(api_key='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')
 
   def get_response(self, input, tokens_max, new_temperature):
     response = self.client.chat.completions.create(

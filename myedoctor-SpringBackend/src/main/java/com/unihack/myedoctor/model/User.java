@@ -26,10 +26,9 @@ public class User {
     @Email(message = "Email should be valid")
     private String email;
 
-    @NonNull
+
     private String firstName;
 
-    @NonNull
     private String lastName;
 
     private Location location;

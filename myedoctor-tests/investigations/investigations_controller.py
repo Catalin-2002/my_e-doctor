@@ -16,6 +16,6 @@ def create_investigation():
 
     # try:
     response_text, response_source = investigations_service.add_investigation(investigation)
-    return jsonify({ 'data': {'responseText': response_text, 'responseSource': f"{SOURCE_BASE_URL}{response_source}"}}), 200
+    return jsonify({'responseText': response_text, 'responseSource': f"{SOURCE_BASE_URL}{response_source}"}), 200
     # except Exception as e:
     #     return jsonify({'error': 'An error occurred when trying to make investigation. Please try again.'}), 400

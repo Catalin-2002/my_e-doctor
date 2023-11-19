@@ -1,5 +1,10 @@
 import { post, request } from './queryClient';
 
+export type GetNextLevelResponse = {
+  characters: string[];
+  testSize: number;
+};
+
 export const initiateTest = async (userId: string) => {
   return await post({
     url: '/api/investigations/snellen-test/start-test',
@@ -13,7 +18,7 @@ export const getNextLevelCharacters = async (testId: string) => {
   });
 };
 
-export const getTestResults = async (testId: string) => {
+export const getTestResults = async (testId: string): Promise<GetNextLevelResponse> => {
   return await request({
     url: `/api/investigations/snellen-test/test-results/${testId}`,
   });
@@ -24,7 +29,11 @@ export type SendCurrentLevelResultsPayload = {
   currentLevelResults: string;
 };
 
-export const sendCurrentLevelResults = async (payload: SendCurrentLevelResultsPayload) => {
+export type SendCurrentLevelResultsResponse = {};
+
+export const sendCurrentLevelResults = async (
+  payload: SendCurrentLevelResultsPayload
+): Promise<SendCurrentLevelResultsResponse> => {
   return await post({
     url: '/api/investigations/snellen-test/current-level-results',
     body: payload,

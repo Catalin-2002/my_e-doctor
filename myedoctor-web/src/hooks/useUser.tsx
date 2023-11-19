@@ -7,10 +7,10 @@ const useUser = () => {
   const { data: session } = useSession();
   const queryClient = useQueryClient();
 
-  const { data: user, isLoading } = useQuery({
+  const { data: userFetched, isLoading } = useQuery({
     queryKey: ['user'],
     queryFn: () => getUser(session?.user.userId!),
-    enabled: !!session?.user.userId,
+    enabled: !!session?.user,
     refetchOnWindowFocus: false,
   });
 
@@ -35,7 +35,7 @@ const useUser = () => {
     },
   });
 
-  return { user: { ...user, imageLocation: session?.user.image }, isLoading, updateUser: mutate, isUpdateLoading, error };
+  return { user: { ...userFetched, imageLocation: session?.user.image }, isLoading, updateUser: mutate, isUpdateLoading, error };
 };
 
 export default useUser;

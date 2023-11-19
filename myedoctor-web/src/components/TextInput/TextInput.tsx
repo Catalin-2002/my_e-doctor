@@ -17,7 +17,8 @@ interface TextInputProps extends ComponentPropsWithoutRef<'input'> {
 
 const textInput = tv({
   slots: {
-    input: 'border-gray-300 focus:border-blue-500 focus:ring focus:ring-blue-200 focus:ring-opacity-50 rounded-md shadow-sm',
+    input:
+      'focus:shadow-outline w-full appearance-none rounded border px-3 py-2 leading-tight text-gray-700 shadow focus:outline-none focus:shadow-outline w-full appearance-none rounded border px-3 py-2 leading-tight text-gray-700 shadow focus:outline-none',
     peer: `absolute left-[14px] top-[-8px] cursor-text bg-white rounded-full px-1 text-xs transition-all peer-placeholder-shown:top-[16px] 
     peer-placeholder-shown:text-[16px] peer-placeholder-shown:text-[#7E7E7E] peer-focus:top-[-8px] 
     peer-focus:left-[14px] peer-focus:text-[#2690E5] peer-focus:text-xs dark:bg-slate-900 text-[#7E7E7E]`,

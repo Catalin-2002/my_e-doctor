@@ -31,5 +31,6 @@ class SnellenCharacterGenerator:
         current_test_instance.set_current_level_characters(characters)
 
         self.snellen_test_manager.update_test(test_id, current_test_instance)
+        print(characters)
 
         return characters

@@ -1,6 +1,6 @@
 import { getLayout } from '@/src/components/Layout/Layout';
 import PermissionDenied from '@/src/components/PermissionDenied/PermissionDenied';
-import VisionTestSteps from '@/src/components/VisionTest/VisionTestSteps';
+import VisionTest from '@/src/components/VisionTest/VisionTest';
 import WebcamStreamCapture from '@/src/components/WebCamStreamCapture/WebCamStreamCapture';
 import { redirectUnauthenticated } from '@/src/helpers/session';
 import usePermissions from '@/src/hooks/usePermissions';
@@ -10,11 +10,10 @@ const VisionTestPage = () => {
   const { hasWebcamPermissions } = usePermissions();
 
   return (
-    <div className="relative flex h-full w-full flex-col items-center justify-center">
-      <VisionTestSteps />
+    <div className="relative flex h-full w-full flex-col items-center justify-center px-10">
+      <VisionTest />
       {hasWebcamPermissions ? (
-        <div className="absolute bottom-5 right-5 flex flex-col items-center gap-5 text-center">
-          <span className="text-3xl">Calibrating...</span>
+        <div className="absolute bottom-2 right-5 flex flex-col items-center gap-5 text-center">
           <WebcamStreamCapture />
         </div>
       ) : (
