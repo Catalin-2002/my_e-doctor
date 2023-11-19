@@ -12,6 +12,7 @@ class InvestigationsService:
   def add_investigation(self, investigation):
     result = self.content_generator.get_content(investigation.get('content'))
     print(f"Content rasp: {str(result)}")
-    result = self.investigations.insert_one(investigation)
-    return result.inserted_id
+    return result
+    # result = self.investigations.insert_one(investigation)
+    # return result.inserted_id
 
