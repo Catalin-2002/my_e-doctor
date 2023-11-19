@@ -28,13 +28,21 @@ export type MakeInvestigationsResponse = {
   content: string;
 };
 
-const makeInvestigation = async (text: string): Promise<MakeInvestigationsResponse> => {
+export type MakeInvestigationsPayload = {
+  question: string;
+  userId: string;
+  createdAt?: number;
+};
+
+const makeInvestigation = async (payload: MakeInvestigationsPayload): Promise<MakeInvestigationsResponse> => {
+  payload.createdAt = Date.now();
+
   await delay(2000);
   return Promise.resolve(mock);
 
   // return await post({
   //   url: '/api/investigations/investigations',
-  //   body: { text },
+  //   body: payload,
   // });
 };
 

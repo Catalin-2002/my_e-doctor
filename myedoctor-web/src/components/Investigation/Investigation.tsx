@@ -8,10 +8,12 @@ import InvestigationChat from '../InvestigationChat/InvestigationChat';
 import { useAtom, useSetAtom } from 'jotai';
 import { investigationResponseAtom, investigationStepAtom, investigationTextAtom } from '@/src/utils/atoms';
 import { MakeInvestigationsResponse } from '@/src/utils/queries/investigations';
+import useUser from '@/src/hooks/useUser';
 
 const Investigation = () => {
   const router = useRouter();
   const { makeInvestigation, isLoading } = useInvestigations();
+  const { user } = useUser();
   const [investigationStep, setInvestigationStep] = useAtom(investigationStepAtom);
   const setInvestigationResponse = useSetAtom(investigationResponseAtom);
   const setInvestigationText = useSetAtom(investigationTextAtom);
@@ -19,12 +21,15 @@ const Investigation = () => {
   const triggerInvestigation = (text: string) => {
     setInvestigationText(text);
 
-    makeInvestigation(text, {
-      onSuccess: (data: MakeInvestigationsResponse) => {
-        setInvestigationStep('INVESTIGATION');
-        setInvestigationResponse(data.content);
-      },
-    });
+    makeInvestigation(
+      { userId: user.userId!, question: text },
+      {
+        onSuccess: (data: MakeInvestigationsResponse) => {
+          setInvestigationStep('INVESTIGATION');
+          setInvestigationResponse(data.content);
+        },
+      }
+    );
   };
 
   return (
