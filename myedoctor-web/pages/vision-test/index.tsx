@@ -5,15 +5,19 @@ import WebcamStreamCapture from '@/src/components/WebCamStreamCapture/WebCamStre
 import { redirectUnauthenticated } from '@/src/helpers/session';
 import usePermissions from '@/src/hooks/usePermissions';
 import { GetServerSidePropsContext } from 'next/types';
+import useUser from '@/src/hooks/useUser';
 
 const VisionTestPage = () => {
   const { hasWebcamPermissions } = usePermissions();
 
+  const { user } = useUser();
+  const BASE_URL = 'http://localhost:5000';
+
   return (
-    <div className="flex h-full w-full flex-col items-center justify-center">
-      <VisionTestSteps />
+    <div className="relative flex h-full w-full flex-col items-center justify-center">
+      <VisionTestSteps userId={user.userId!} baseUrl={BASE_URL} />
       {hasWebcamPermissions ? (
-        <div className="flex flex-col items-center gap-5 text-center">
+        <div className="absolute  bottom-0 right-0 flex flex-col items-center gap-5 text-center">
           <span className="text-3xl">Calibrating...</span>
           <WebcamStreamCapture />
         </div>
