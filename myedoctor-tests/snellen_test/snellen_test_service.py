@@ -71,9 +71,11 @@ class SnellenTestService:
         characters = self.snellen_character_generator.generate_characters(test_id)
         desired_distance_cm = self.snellen_test_manager.get_test(test_id).get_last_camera_frame_distance()
 
-        desired_distance_pixels = desired_distance_cm * np.tan(5 / 60 * np.pi / 180 * ) * self.screen_dpi 
+        test_level = self.snellen_test_manager.get_test(test_id).get_current_level()
 
-        return characters, desired_distance
+        desired_distance_pixels = desired_distance_cm * np.tan(5 / 60 * np.pi / 180 * 11 / test_level) * self.screen_dpi 
+
+        return characters, desired_distance_pixels
 
     def get_test_results(self, test_id):
         pass
