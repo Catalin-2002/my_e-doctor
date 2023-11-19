@@ -1,4 +1,4 @@
-import React, { PropsWithChildren, ReactNode } from 'react';
+import React, { PropsWithChildren } from 'react';
 import Head from 'next/head';
 import { useRouter } from 'next/router';
 import SideMenu from '../SideMenu/SideMenu';
@@ -12,11 +12,10 @@ const Layout = ({ children, title }: PropsWithChildren<LayoutProps>) => {
 
   return (
     <>
-      {title && (
-        <Head>
-          <title>{title}</title>
-        </Head>
-      )}
+      <Head>
+        {title && <title>{title}</title>}
+        <link rel="shortcut icon" href="/icon2.ico" />
+      </Head>
       <div className="flex min-h-[100vh] flex-col justify-between">
         <div className="flex h-full w-full grow">
           {pathname !== '/' && <SideMenu />}

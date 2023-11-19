@@ -18,18 +18,50 @@ const HomePage = () => {
   }
 
   return (
-    <div className="flex min-h-screen w-full items-center justify-center bg-gray-100">
-      <div className="rounded-lg bg-white p-8 text-center shadow-md">
-        <h1 className="mb-6 text-3xl font-semibold">Welcome to MyEDoctor</h1>
-        <p className="mb-6 text-gray-600">Your trusted healthcare companion.</p>
-        <div className="flex flex-col gap-4">
-          <Button onClick={signIn}>Sign In</Button>
-          <Button intent="secondary" onClick={signIn}>
-            Sign Up
+    <>
+      <div className="flex min-h-screen w-full flex-col bg-prussian-blue  md:flex-row">
+        <div className="flex w-2/5 flex-col items-start justify-center pl-24">
+          <img src="/icon3.png" alt="Icon" className="h-50 w-50 m-auto" />
+        </div>
+        <div className="flex w-full max-w-[1000px] flex-col justify-center pr-24">
+          <h1 className="text-move mb-8 text-5xl font-bold text-neon-blue">Healthcare Simplified, Life Amplified</h1>
+          <p className="mb-8 text-3xl font-semibold tracking-wide text-white">
+            My E-Doctor, where your health journey transitions from guesswork to precision with just a few clicks. As a signed-in
+            user, simply tell us what's on your mind or pick a test and let our intelligent system suggest the right assessments
+            for your symptoms. Dive into a comprehensive array of tests, from eye exams to specialist referrals, all tailored to
+            your needs and location.
+          </p>
+          <Button onClick={signIn} className="hover-hov-green h-16 w-[200px] bg-mint-green p-4 text-2xl">
+            Get started
           </Button>
         </div>
       </div>
-    </div>
+      <div className="flex flex-col">
+        {/* Secțiunea 1 */}
+        <div className="flex min-h-screen items-center justify-center bg-gray-100">
+          <div className="flex w-3/4">
+            <img src="/path-to-your-image1.jpg" alt="Descriere imagine" className="w-1/2 object-cover" />
+            <div className="w-1/2 p-8">
+              <h2 className="mb-4 text-4xl font-bold">Titlu secțiune 1</h2>
+              <p className="text-lg">Descrierea pentru secțiunea 1...</p>
+            </div>
+          </div>
+        </div>
+
+        {/* Secțiunea 2 */}
+        <div className="flex min-h-screen items-center justify-center bg-gray-200">
+          <div className="flex w-3/4">
+            <div className="w-1/2 p-8">
+              <h2 className="mb-4 text-4xl font-bold">Titlu secțiune 2</h2>
+              <p className="text-lg">Descrierea pentru secțiunea 2...</p>
+            </div>
+            <img src="/path-to-your-image2.jpg" alt="Descriere imagine" className="w-1/2 object-cover" />
+          </div>
+        </div>
+
+        {/* Adaugă mai multe secțiuni după acest model */}
+      </div>
+    </>
   );
 };
 
