@@ -1,12 +1,12 @@
 from os import environ
 from openai import OpenAI
+import os
 
 MODEL = "gpt-4-1106-preview"
 
 class Assistant:
   def __init__(self) -> None:
-    # TODO ADD API KEY
-    openai_api_key = "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"
+    openai_api_key = os.environ.get('OPEN_AI_KEY')
     self.client = OpenAI(api_key=openai_api_key)
 
   def get_response(self, input, tokens_max, new_temperature):
