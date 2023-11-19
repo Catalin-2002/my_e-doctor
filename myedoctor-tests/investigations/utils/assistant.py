@@ -6,7 +6,6 @@ MODEL = "gpt-4-1106-preview"
 
 class Assistant:
   def __init__(self) -> None:
-    # TODO ADD API KEY
     openai_api_key = os.environ.get('OPEN_AI_KEY')
     self.client = OpenAI(api_key=openai_api_key)
 

@@ -1,5 +1,6 @@
 package com.unihack.myedoctor.controller;
 
+import com.unihack.myedoctor.model.HealthReport;
 import com.unihack.myedoctor.model.User;
 import com.unihack.myedoctor.service.UserService;
 import jakarta.validation.Valid;
@@ -23,6 +24,12 @@ public class UserController {
     public ResponseEntity<User> updateUser(@PathVariable String userId, @Valid @RequestBody User user) {
         return ResponseEntity.ok(userService.updateUserById(userId, user));
     }
+
+    @GetMapping("/{userId}")
+    public ResponseEntity<User> getUserByUserId(@PathVariable String userId) {
+        return ResponseEntity.ok(userService.getUserById(userId));
+    }
+
 
     @DeleteMapping("/delete/{userId}")
     public ResponseEntity<Void> deleteUser(@PathVariable String userId) {
