@@ -11,13 +11,13 @@ import { getOccupations } from '@/src/utils/queries/occupations';
 import Form from '../Form/Form';
 
 import UserPicture from '../UserPicture/UserPicture';
-import { User } from '@/src/types/user';
 
 const UserProfile = () => {
   const { user, isLoading, isUpdateLoading } = useUser();
   const { data: occupations, isLoading: occupationsLoading } = useQuery({
     queryKey: ['occupations'],
     queryFn: () => getOccupations(),
+    refetchOnWindowFocus: false,
   });
 
   const form = useZodForm({
@@ -43,7 +43,7 @@ const UserProfile = () => {
   if (!user) return null;
 
   const triggerUserUpdate = (data: typeof userSchema._type) => {
-    updateUser({ ...data, userId: user?.userId || '' });
+    updateUser({ ...data, userId: user?.userId! });
     // TODO: add location field to current location
   };
 
@@ -52,7 +52,7 @@ const UserProfile = () => {
   return (
     <div className="flex min-h-screen w-full gap-5 p-10">
       <UserPicture />
-      <Form form={form} onSubmit={(data) => triggerUserUpdate(data)} className="flex flex-col gap-4 p-4">
+      <Form form={form} className="flex flex-col gap-4 p-4">
         <h2 className="mb-4 text-2xl font-semibold text-neon-green">Welcome to MyE-Doctor, User!</h2>
         <p className="mb-5 text-lg">Please, complete the following form with your personal details:</p>
 

@@ -24,7 +24,7 @@ const UserPicture = ({ className = '', iconClassName = '' }: UserPictureProps) =
       {user.imageLocation ? (
         <Image src={user.imageLocation} alt="user-image" className="h-full w-full rounded-full" fill />
       ) : (
-        <FontAwesomeIcon icon={faUser} className={twMerge('text-[74px] text-white', iconClassName)} />
+        <FontAwesomeIcon icon={faUser} className={twMerge('m-auto text-[74px] text-white', iconClassName)} />
       )}
     </div>
   );

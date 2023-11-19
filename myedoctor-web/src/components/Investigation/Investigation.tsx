@@ -3,33 +3,21 @@ import Button from '../Button/Button';
 import SymptomTextInput from '../SymptomTextInput/SymptomTextInput';
 import useInvestigations from '@/src/hooks/useInvestigations';
 import LoaderModal from '../LoaderModal/LoaderModal';
-
-import InvestigationChat from '../InvestigationChat/InvestigationChat';
-import { useAtom, useSetAtom } from 'jotai';
-import { investigationResponseAtom, investigationStepAtom, investigationTextAtom } from '@/src/utils/atoms';
-import { MakeInvestigationsResponse } from '@/src/utils/queries/investigations';
+import { useAtomValue, useSetAtom } from 'jotai';
 import useUser from '@/src/hooks/useUser';
+import InvestigationChat from '../InvestigationChat/InvestigationChat';
+import { investigationStepAtom, investigationTextAtom } from '@/src/utils/atoms';
 
 const Investigation = () => {
   const router = useRouter();
   const { makeInvestigation, isLoading } = useInvestigations();
   const { user } = useUser();
-  const [investigationStep, setInvestigationStep] = useAtom(investigationStepAtom);
-  const setInvestigationResponse = useSetAtom(investigationResponseAtom);
   const setInvestigationText = useSetAtom(investigationTextAtom);
+  const investigationStep = useAtomValue(investigationStepAtom);
 
   const triggerInvestigation = (text: string) => {
     setInvestigationText(text);
-
-    makeInvestigation(
-      { userId: user.userId!, question: text },
-      {
-        onSuccess: (data: MakeInvestigationsResponse) => {
-          setInvestigationStep('INVESTIGATION');
-          setInvestigationResponse(data.content);
-        },
-      }
-    );
+    makeInvestigation({ userId: user.userId!, question: text });
   };
 
   return (

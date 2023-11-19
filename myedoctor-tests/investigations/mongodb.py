@@ -23,26 +23,3 @@ class MongoDBConnection:
         if self.client:
             self.client.close()
             print("Disconnected from MongoDB")
-
-
-
-# Define your Flask endpoint for POST requests
-@app.route('/api/data', methods=['POST'])
-def add_data():
-    try:
-        # Assuming the incoming data is in JSON format
-        data = request.get_json()
-
-        # Insert the data into MongoDB
-        collection = mongo_conn.db['your_collection_name']
-        result = collection.insert_one(data)
-
-        # Optionally, you can return the inserted document ID as a response
-        response = {'message': 'Data inserted successfully', 'inserted_id': str(result.inserted_id)}
-        return jsonify(response), 201
-    except Exception as e:
-        return jsonify({'error': str(e)}), 500
-
-# Run the Flask app
-if __name__ == '__main__':
-    app.run(debug=True)
