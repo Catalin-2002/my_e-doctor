@@ -27,7 +27,7 @@ def update_camera_frame():
 
     try :
         snellen_test_service.update_camera_frame(test_id, camera_frame)
-        return jsonify(), 200
+        return jsonify({'Worked': True}), 200
     except Exception as e:
         return jsonify({'Some error occured when trying to update the camera frame. Please restart the test and try again.'}), 400
     
@@ -40,7 +40,7 @@ def send_current_level_results():
 
     try :
         current_level_results = snellen_test_service.send_current_level_results(test_id, current_level_results)
-        return jsonify(current_level_results), 200
+        return jsonify({'result', current_level_results}), 200
     except Exception as e:
         return jsonify({'Some error occured when trying to transmit the current level results. Please restart the test and try again.'}), 400
     
@@ -51,8 +51,8 @@ def get_next_level_characters():
 
     try :
         print ('test_id', test_id)
-        next_level_characters_sizes = snellen_test_service.get_next_level_characters(test_id)
-        return jsonify(next_level_characters_sizes), 200
+        next_level_character, next_level_size = snellen_test_service.get_next_level_characters(test_id)
+        return jsonify({'characters': next_level_character, 'test-size': next_level_size}), 200
     except Exception as e:
         return jsonify({'Some error occured when trying to get the next level characters. Please restart the test and try again.'}), 400
     
@@ -63,6 +63,6 @@ def get_test_results():
     
     try :
         test_results = snellen_test_service.get_test_results(test_id)
-        return jsonify(test_results), 200
+        return jsonify({'test-result': test_results}), 200
     except Exception as e:
         return jsonify({'Some error occured when trying to get the test results. Please restart the test and try again.'}), 400
