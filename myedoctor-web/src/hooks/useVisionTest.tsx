@@ -12,8 +12,9 @@ import { useMutation } from '@tanstack/react-query';
 const useVisionTest = () => {
   const { user } = useUser();
   const [testId, setTestId] = useState<string | undefined>(undefined);
-  const [testCharacters, setTestCharacters] = useState<string[]>([]);
+  const [testCharacters, setTestCharacters] = useState<string>('');
   const [testCharactersSize, setTestCharactersSize] = useState<number>();
+  const [testResults, setTestResults] = useState<string | null>(null);
 
   const createTest = useCallback(
     async (userId: string) => {
@@ -41,11 +42,15 @@ const useVisionTest = () => {
   const { mutate: sendResults } = useMutation({
     mutationFn: sendCurrentLevelResults,
     onSuccess: (data: SendCurrentLevelResultsResponse) => {
-      getNextLevel(testId!);
+      if (data.testResults) {
+        setTestResults(data.testResults);
+      } else {
+        getNextLevel(testId!);
+      }
     },
   });
 
-  return { testId, getNextLevel, sendResults, testCharacters, testCharactersSize };
+  return { testId, getNextLevel, sendResults, testCharacters, testCharactersSize, testResults };
 };
 
 export default useVisionTest;

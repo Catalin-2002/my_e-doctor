@@ -5,18 +5,22 @@ import Button from '../Button/Button';
 import { useState } from 'react';
 
 const VisionTest = () => {
-  const { testId, getNextLevel, testCharacters, testCharactersSize, sendResults } = useVisionTest();
+  const { testId, getNextLevel, testCharacters, testCharactersSize, sendResults, testResults } = useVisionTest();
   const [inputValue, setInputValue] = useState<string>('');
 
   return (
     <div className="flex w-full flex-col gap-2">
       <div className="mx-auto flex w-full max-w-[700px] flex-col items-center gap-5">
-        <TestBox
-          testCharacters={testCharacters.join()}
-          size={testCharactersSize}
-          triggerInitialLoad={() => getNextLevel(testId!)}
-        />
-        {testCharacters && testId && (
+        {testResults && (
+          <div className="flex flex-col text-center">
+            <span className="text-lg">Your test results are:</span>
+            <span className="text-2xl font-semibold text-neon-green">{testResults}</span>
+          </div>
+        )}
+        {!testResults && (
+          <TestBox testCharacters={testCharacters} size={testCharactersSize} triggerInitialLoad={() => getNextLevel(testId!)} />
+        )}
+        {!testResults && testCharacters && testId && (
           <div className="flex gap-2 self-start">
             <TextInput
               name="inputText"

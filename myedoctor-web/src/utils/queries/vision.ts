@@ -1,7 +1,7 @@
 import { post, request } from './queryClient';
 
 export type GetNextLevelResponse = {
-  characters: string[];
+  characters: string;
   testSize: number;
 };
 
@@ -29,7 +29,9 @@ export type SendCurrentLevelResultsPayload = {
   currentLevelResults: string;
 };
 
-export type SendCurrentLevelResultsResponse = {};
+export type SendCurrentLevelResultsResponse = {
+  testResults: string | null;
+};
 
 export const sendCurrentLevelResults = async (
   payload: SendCurrentLevelResultsPayload
