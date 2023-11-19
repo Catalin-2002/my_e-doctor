@@ -59,3 +59,25 @@ class SnellenTestInstance:
 
     def set_current_level_characters(self, current_level_characters):
         self.current_level_characters = current_level_characters
+
+    def calculate_final_score(self):
+        snellen_map = {
+            1: "20/200 in the US starndard units and (6/60) for non-us",
+            2: "20/100 in the US starndard units and (6/30) for non-us",
+            3: "20/70 in the US starndard units and (6/21) for non-us",
+            4: "20/50 in the US starndard units and (6/15) for non-us",
+            5: "20/40 in the US starndard units and (6/12) for non-us",
+            6: "20/30 in the US starndard units and (6/9) for non-us",
+            7: "20/25 in the US starndard units and (6/7.5) for non-us",
+            8: "20/20 in the US starndard units and (6/6) for non-us",
+            9: "20/15 in the US starndard units and (6/4.5) for non-us",
+            10: "20/10 in the US starndard units and (6/3) for non-us",
+            11: "Better than 20/10 in the US starndard units and Better than (6/3) for non-us"
+        }
+
+        # If the level is within the range, return the corresponding Snellen score
+        if 1 <= self.current_level <= 11:
+            self.final_score = snellen_map[self.current_level]
+            return self.final_score
+        else:
+            raise Exception("Invalid level")

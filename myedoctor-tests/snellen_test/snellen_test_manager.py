@@ -21,6 +21,5 @@ class SnellenTestManager:
 
         return self.snellen_tests.get(test_id)
 
-    
     def update_test(self, test_id, new_test):
         self.snellen_tests[test_id] = new_test

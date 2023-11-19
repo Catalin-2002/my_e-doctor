@@ -12,7 +12,7 @@ BASE_URL = "http://127.0.0.1:5000"  # Replace with your default IP
 class ImageAndAPIScript:
     def __init__(self):
         self.base_url = BASE_URL
-        self.userID = 3
+        self.userId = 3
         self.cap = cv2.VideoCapture(1)
 
         if not self.cap.isOpened():
@@ -30,11 +30,11 @@ class ImageAndAPIScript:
 
     
     def create_test(self):
-        response = requests.post(f"{self.base_url}/snellen_test/start-test", json={'userID': self.userID})
+        response = requests.post(f"{self.base_url}/snellen_test/start-test", json={'userId': self.userId})
         if response.status_code == 200:
-            test_id = response.json().get('testID')
+            test_id = response.json().get('testId')
             self.test_id = test_id
-            print(f"Test created with ID {test_id}")
+            print(f"Test created with Id {test_id}")
             self.start_send_image_thread()
         else:
             print("Error creating test")
@@ -60,14 +60,14 @@ class ImageAndAPIScript:
 
         # Send the base64 string in the JSON payload
         response = requests.post(f"{self.base_url}/snellen_test/update-camera-frame", 
-                                 json={'testID': self.test_id, 'cameraFrame': image_as_base64_string})
+                                 json={'testId': self.test_id, 'cameraFrame': image_as_base64_string})
 
         # Wait for 0.2 seconds before the next image
         time.sleep(0.2)
-        self.send_image()
+        #self.send_image()
 
     def get_next_level_characters(self):
-        response = requests.get(f"{self.base_url}/snellen_test/get-next-level-characters", json={'testID': self.test_id})
+        response = requests.get(f"{self.base_url}/snellen_test/get-next-level-characters", json={'testId': self.test_id})
         if response.status_code == 200:
             characters = response.json()
             print("Next level characters:", characters)
@@ -76,7 +76,7 @@ class ImageAndAPIScript:
 
     def send_next_level_characters(self, predicted_characters):
         predicted_characters = list(predicted_characters)
-        response = requests.post(f"{self.base_url}/snellen_test/send-current-level-results", json={'testID': self.test_id, 'currentLevelResults': predicted_characters})
+        response = requests.post(f"{self.base_url}/snellen_test/send-current-level-results", json={'testId': self.test_id, 'currentLevelResults': predicted_characters})
         if response.status_code == 200:
             result = response.json()
             print('Response from server', result) 
