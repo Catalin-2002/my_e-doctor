@@ -10,7 +10,7 @@ class InvestigationsService:
     self.content_generator = ContentGenerator()
 
   def add_investigation(self, investigation):
-    result = self.content_generator.get_content(investigation.get('content'))
+    result = self.content_generator.get_content(investigation.get('question'))
     print(f"Content rasp: {str(result)}")
     return result
     # result = self.investigations.insert_one(investigation)

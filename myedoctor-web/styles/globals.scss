@@ -49,6 +49,12 @@ a {
   }
 }
 
+li {
+  font-size: 14px;
+  margin-left: 20px;
+  list-style-type: circle;
+}
+
 @keyframes moveText {
   0%,
   100% {

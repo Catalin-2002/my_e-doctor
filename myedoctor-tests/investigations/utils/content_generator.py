@@ -16,7 +16,9 @@ class ContentGenerator:
         return not any(isinstance(child, NavigableString) and child.strip() == '' for child in element.contents)
     
     def get_search_query(self, symptom_description):
+        print(symptom_description)
         extracted_term = self.assistant.extract_search_term(symptom_description)
+        print("extracted term", extracted_term)
         translated_term = self.assistant.translate_search_term(extracted_term)
 
         return translated_term

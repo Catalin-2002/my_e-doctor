@@ -48,7 +48,7 @@ const VisionTest = () => {
                 })
               }
             >
-              Check
+              Verify
             </Button>
           </div>
         )}
