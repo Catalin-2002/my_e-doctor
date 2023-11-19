@@ -7,3 +7,6 @@ export const investigationResponseSourceAtom = atom<string | undefined>(undefine
 export const investigationStepAtom = atom<InvestigationStep>('INITIAL');
 
 export const investigationTextAtom = atom<string | undefined>(undefined);
+
+export const testIdAtom = atom<string | undefined>(undefined);
+export const characterSizeAtom = atom<number | undefined>(undefined);

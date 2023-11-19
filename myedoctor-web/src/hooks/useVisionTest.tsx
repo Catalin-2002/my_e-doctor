@@ -8,12 +8,14 @@ import {
   sendCurrentLevelResults,
 } from '../utils/queries/vision';
 import { useMutation } from '@tanstack/react-query';
+import { useAtom } from 'jotai';
+import { characterSizeAtom, testIdAtom } from '../utils/atoms';
 
 const useVisionTest = () => {
   const { user } = useUser();
-  const [testId, setTestId] = useState<string | undefined>(undefined);
+  const [testId, setTestId] = useAtom(testIdAtom);
   const [testCharacters, setTestCharacters] = useState<string>('');
-  const [testCharactersSize, setTestCharactersSize] = useState<number>();
+  const [testCharactersSize, setTestCharactersSize] = useAtom(characterSizeAtom);
   const [testResults, setTestResults] = useState<string | null>(null);
 
   const createTest = useCallback(

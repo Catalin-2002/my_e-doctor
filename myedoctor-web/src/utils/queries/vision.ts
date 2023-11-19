@@ -24,6 +24,18 @@ export const getTestResults = async (testId: string): Promise<GetNextLevelRespon
   });
 };
 
+export type UpdateCameraFramePayload = {
+  testId: string;
+  cameraFrame: string;
+};
+
+export const updateCameraFrame = async (payload: UpdateCameraFramePayload) => {
+  return await post({
+    url: '/api/investigations/snellen-test/camera-frame',
+    body: payload,
+  });
+};
+
 export type SendCurrentLevelResultsPayload = {
   testId: string;
   currentLevelResults: string;

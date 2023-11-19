@@ -3,14 +3,12 @@ import TextInput from '../TextInput/TextInput';
 import { useZodForm } from '@/src/hooks/useZodForm';
 import { userSchema } from '@/src/schemas/user';
 import useUser from '@/src/hooks/useUser';
-
+import UserPicture from '../UserPicture/UserPicture';
+import Button from '../Button/Button';
 import Loader from '../Loader/Loader';
 import { useQuery } from '@tanstack/react-query';
 import { getOccupations } from '@/src/utils/queries/occupations';
 import Form from '../Form/Form';
-
-import UserPicture from '../UserPicture/UserPicture';
-import Button from '../Button/Button';
 
 const UserProfile = () => {
   const { user, isLoading, isUpdateLoading, updateUser } = useUser();
@@ -30,8 +28,6 @@ const UserProfile = () => {
       occupation: user?.occupationField,
     },
   });
-
-  console.log(form.formState.errors);
 
   if (isLoading || occupationsLoading || isUpdateLoading) {
     return (
