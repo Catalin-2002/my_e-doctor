@@ -6,7 +6,7 @@ MODEL = "gpt-4-1106-preview"
 class Assistant:
   def __init__(self) -> None:
     # TODO ADD API KEY
-    openai_api_key = "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"
+    openai_api_key = "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"
     self.client = OpenAI(api_key=openai_api_key)
 
   def get_response(self, input, tokens_max, new_temperature):

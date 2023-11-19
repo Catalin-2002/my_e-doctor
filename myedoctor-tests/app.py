@@ -6,7 +6,7 @@ from  investigations.investigations_controller import investigations_blueprint
 app = Flask(__name__)
 # Register the snellen test blueprint
 app.register_blueprint(snellen_test_blueprint, url_prefix='/snellen-test')
-app.register_blueprint(investigations_blueprint, url_prefix='/investigations')
+app.register_blueprint(investigations_blueprint, url_prefix='/api/investigations')
 
 def print_routes(app):
     print('Available routes:')
