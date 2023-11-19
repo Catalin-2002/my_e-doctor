@@ -7,7 +7,7 @@ MODEL = "gpt-4-1106-preview"
 class Assistant:
   def __init__(self) -> None:
     openai_api_key = os.environ.get('OPEN_AI_KEY')
-    self.client = OpenAI(api_key='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')
+    self.client = OpenAI(api_key='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')
 
   def get_response(self, input, tokens_max, new_temperature):
     response = self.client.chat.completions.create(
@@ -28,11 +28,11 @@ class Assistant:
   
   def translate_response(self, search_term):
     prompt = f"Translate this to ENGLISH: {search_term}"
-    return self.get_response(prompt, 400, .7)
+    return self.get_response(prompt, 800, .7)
   
   def get_relevant_content(self, content, initial_symptom_description):
     prompt = f"Given the following symptom description provide only the best 5 relevant paragraphs and concatenate the text WITHOUT CHANGING IT: {initial_symptom_description}, please select the most relevant content from the following list: {content} and please adhere to the requirements mentioned in the beginning of the promt."
-    response = self.get_response(prompt, 400, .8)
+    response = self.get_response(prompt, 800, .8)
     # If there are structures like P1: or P2: remove them using a loop
     response = response.replace('P1:', '').replace('P2:', '').replace('P3:', '').replace('P4:', '').replace('P5:', '')
     # Replace the end of line characters with a space

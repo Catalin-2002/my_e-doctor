@@ -17,7 +17,9 @@ module.exports = {
         primary: '#4890E3',
         'prussian-blue': '#003153',
         'neon-green': '#00FF00',
-        // 'mint-green':'#39FF14'
+        'neon-blue': '#00c0ff',
+        'mint-green': '#30cd5d',
+        'hov-green': '#1da257',
         green: '#83CB3D',
       },
       aspectRatio: {

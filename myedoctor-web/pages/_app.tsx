@@ -1,4 +1,4 @@
-import { Roboto } from 'next/font/google';
+import { Montserrat } from 'next/font/google';
 import type { AppProps } from 'next/app';
 import { config } from '@fortawesome/fontawesome-svg-core';
 import { NextPage } from 'next';
@@ -14,7 +14,7 @@ import { Provider } from 'jotai';
 
 config.autoAddCss = false;
 
-const roboto = Roboto({
+const roboto = Montserrat({
   weight: ['300', '400', '500', '700'],
   subsets: ['latin'],
   display: 'swap',
@@ -30,7 +30,7 @@ const App = ({ Component, pageProps }: AppProps) => {
       <QueryClientProvider client={client}>
         <ToastContainer closeButton={false} pauseOnFocusLoss={false} />
         <Provider>
-          <main className={`${roboto.variable} bg-white font-sans`}>{getLayout(<Component {...pageProps} />)}</main>
+          <main className={`${roboto.variable} bg-gray-100 font-sans`}>{getLayout(<Component {...pageProps} />)}</main>
         </Provider>
       </QueryClientProvider>
     </SessionProvider>

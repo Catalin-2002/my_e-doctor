@@ -46,11 +46,10 @@ const UserProfile = () => {
   const { isValid } = form.formState;
 
   return (
-    <div className="flex min-h-screen w-full gap-5 p-10">
+    <div className="flex min-h-screen w-full gap-5 p-10 pl-20">
       <UserPicture className="shrink-0" />
       <Form onSubmit={triggerUserUpdate} form={form} className="flex max-w-[700px] flex-col gap-4 p-4">
-        <h2 className="mb-4 text-2xl font-semibold text-neon-green">Welcome to MyE-Doctor, User!</h2>
-        <p className="mb-5 text-lg">Please, complete the following form with your personal details:</p>
+        <p className="mb-5 text-lg font-medium">Please, complete the following form with your personal details.</p>
         <div>
           <label htmlFor="email" className="mb-1 block text-sm font-medium text-gray-700">
             Email
@@ -87,12 +86,13 @@ const UserProfile = () => {
           />
         </div>
         <div>
-          <label htmlFor="occupation" className="mb-1 block text-sm font-medium text-gray-700">
+          <label htmlFor="occupation" className="text-sm font-medium text-gray-700">
             Occupation
           </label>
           <select
             id="occupation"
-            className="w-full rounded-md border p-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
+            placeholder="Select an ocuppation"
+            className="mt-1 block h-[38px] w-1/2 cursor-pointer rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
             {...form.register('occupation')}
           >
             {occupations?.map((occupation: string) => (

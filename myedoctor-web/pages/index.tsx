@@ -5,6 +5,7 @@ import useSession from '@/src/hooks/useSession';
 import Loader from '@/src/components/Loader/Loader';
 import { redirectAuthenticated } from '@/src/helpers/session';
 import { getLayout } from '@/src/components/Layout/Layout';
+import Image from 'next/image';
 
 const HomePage = () => {
   const { isLoading, signIn } = useSession();
@@ -18,18 +19,25 @@ const HomePage = () => {
   }
 
   return (
-    <div className="flex min-h-screen w-full items-center justify-center bg-gray-100">
-      <div className="rounded-lg bg-white p-8 text-center shadow-md">
-        <h1 className="mb-6 text-3xl font-semibold">Welcome to MyEDoctor</h1>
-        <p className="mb-6 text-gray-600">Your trusted healthcare companion.</p>
-        <div className="flex flex-col gap-4">
-          <Button onClick={signIn}>Sign In</Button>
-          <Button intent="secondary" onClick={signIn}>
-            Sign Up
+    <>
+      <div className="flex min-h-screen w-full flex-col bg-prussian-blue  md:flex-row">
+        <div className="flex w-2/5 flex-col items-end justify-center pl-24">
+          <Image src="/icon3.png" alt="Icon" height={400} width={400} className="cover m-auto shrink-0" />
+        </div>
+        <div className="flex w-2/5 flex-col justify-center pr-24">
+          <h1 className="text-move mb-8 text-5xl font-bold text-neon-blue">Healthcare Simplified, Life Amplified</h1>
+          <p className="mb-8 text-2xl font-medium tracking-wide text-white">
+            My E-Doctor, where your health journey transitions from guesswork to precision with just a few clicks. As a signed-in
+            user, simply tell us what's on your mind or pick a test and let our intelligent system suggest the right assessments
+            for your symptoms. Dive into a comprehensive array of tests, from eye exams to specialist referrals, all tailored to
+            your needs and location.
+          </p>
+          <Button onClick={signIn} className="hover-hov-green h-16 w-[200px] bg-mint-green p-4 text-2xl">
+            Get started
           </Button>
         </div>
       </div>
-    </div>
+    </>
   );
 };
 

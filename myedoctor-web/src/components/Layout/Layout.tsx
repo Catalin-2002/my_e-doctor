@@ -12,12 +12,11 @@ const Layout = ({ children, title }: PropsWithChildren<LayoutProps>) => {
 
   return (
     <>
-      {title && (
-        <Head>
-          <title>{title}</title>
-        </Head>
-      )}
-      <div className="flex flex-col justify-between">
+      <Head>
+        {title && <title>{title}</title>}
+        <link rel="shortcut icon" href="/icon2.ico" />
+      </Head>
+      <div className="flex min-h-[100vh] flex-col justify-between">
         <div className="flex h-full w-full grow">
           {pathname !== '/' && <SideMenu />}
           <div className="flex w-full grow">{children}</div>

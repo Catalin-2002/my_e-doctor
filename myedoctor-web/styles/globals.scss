@@ -49,6 +49,40 @@ a {
   }
 }
 
+li {
+  font-size: 14px;
+  margin-left: 20px;
+  list-style-type: circle;
+}
+
+@keyframes moveText {
+  0%,
+  100% {
+    transform: translateX(0);
+  }
+  50% {
+    transform: translateX(10px);
+  }
+}
+
+.text-move {
+  animation: moveText 2s ease-in-out infinite;
+}
+
+@keyframes colorChange {
+  0%,
+  100% {
+    color: '#e03458';
+  }
+  50% {
+    color: '#ffffff';
+  }
+}
+
+.text-color-change {
+  animation: colorChange 2s ease-in-out infinite;
+}
+
 :root {
   --rounded-1: 4px;
   --rounded-2: 8px;
