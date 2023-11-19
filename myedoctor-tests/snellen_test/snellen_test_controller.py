@@ -26,8 +26,8 @@ def update_camera_frame():
     camera_frame = request.json.get('cameraFrame')
 
     try :
-        snellen_test_service.update_camera_frame(test_id, camera_frame)
-        return jsonify({'worked': True}), 200
+        next_level_size = snellen_test_service.update_camera_frame(test_id, camera_frame)
+        return jsonify({'levelSize': next_level_size}), 200
     except Exception as e:
         return jsonify({'Some error occured when trying to update the camera frame. Please restart the test and try again.'}), 400
     
