@@ -38,11 +38,11 @@ def send_current_level_results():
     test_id = request.json.get('testId')
     current_level_results = request.json.get('currentLevelResults')
 
-    # try :
-    test_results = snellen_test_service.send_current_level_results(test_id, current_level_results)
-    return jsonify({'testResults': test_results}), 200
-    # except Exception as e:
-    #     return jsonify({'Some error occured when trying to transmit the current level results. Please restart the test and try again.'}), 400
+    try :
+        test_results = snellen_test_service.send_current_level_results(test_id, current_level_results)
+        return jsonify({'testResults': test_results}), 200
+    except Exception as e:
+        return jsonify({'Some error occured when trying to transmit the current level results. Please restart the test and try again.'}), 400
     
 @snellen_test_blueprint.route('/next-level-characters/<test_id>', methods=['GET'])
 @cross_origin()
