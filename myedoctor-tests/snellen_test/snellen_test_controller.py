@@ -46,9 +46,7 @@ def send_current_level_results():
     
 @snellen_test_blueprint.route('/next-level-characters/<test_id>', methods=['GET'])
 @cross_origin()
-def get_next_level_characters():
-    test_id = request.json.get('testId')
-
+def get_next_level_characters(test_id):
     try :
         next_level_character, next_level_size = snellen_test_service.get_next_level_characters(test_id)
         return jsonify({'characters': next_level_character, 'testSize': next_level_size}), 200
