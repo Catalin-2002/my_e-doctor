@@ -10,7 +10,7 @@ def create_investigation():
     investigation = request.json
 
     # try:
-    investigation_id = investigations_service.add_investigation(investigation)
-    return jsonify({'investigationId': investigation_id}), 200
+    response_text, response_source = investigations_service.add_investigation(investigation)
+    return jsonify({'response-text': response_text, 'response-source': response_source}), 200
     # except Exception as e:
     #     return jsonify({'error': 'An error occurred when trying to make investigation. Please try again.'}), 400
