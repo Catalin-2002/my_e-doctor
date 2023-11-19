@@ -3,11 +3,7 @@ from flask_cors import CORS, cross_origin
 
 from snellen_test.snellen_test_service import SnellenTestService
 
-<<<<<<< HEAD
-snellen_test_blueprint = Blueprint('api/snell_test', __name__)
-=======
 snellen_test_blueprint = Blueprint('snellen-test', __name__)
->>>>>>> 0ed0f87684b69a8ef2ef2e2482de787414b13cba
 snellen_test_service = SnellenTestService()
 CORS(snellen_test_blueprint)
 
@@ -50,28 +46,11 @@ def send_current_level_results():
     
 @snellen_test_blueprint.route('/next-level-characters/<test_id>', methods=['GET'])
 @cross_origin()
-<<<<<<< HEAD
 def get_next_level_characters():
     test_id = request.json.get('testId')
 
-=======
-def get_next_level_characters(test_id):
->>>>>>> 0ed0f87684b69a8ef2ef2e2482de787414b13cba
     try :
         next_level_character, next_level_size = snellen_test_service.get_next_level_characters(test_id)
         return jsonify({'characters': next_level_character, 'testSize': next_level_size}), 200
     except Exception as e:
-<<<<<<< HEAD
         return jsonify({'Some error occured when trying to get the next level characters. Please restart the test and try again.'}), 400
-=======
-        return jsonify({'Some error occured when trying to get the next level characters. Please restart the test and try again.'}), 400
-    
-@snellen_test_blueprint.route('/test-results/<test_id>', methods=['GET'])
-@cross_origin()
-def get_test_results(test_id):    
-    try :
-        test_results = snellen_test_service.get_test_results(test_id)
-        return jsonify({'testResult': test_results}), 200
-    except Exception as e:
-        return jsonify({'Some error occured when trying to get the test results. Please restart the test and try again.'}), 400
->>>>>>> 0ed0f87684b69a8ef2ef2e2482de787414b13cba
