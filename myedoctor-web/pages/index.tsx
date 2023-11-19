@@ -28,9 +28,9 @@ const HomePage = () => {
           <h1 className="text-move mb-8 text-5xl font-bold text-neon-blue">Healthcare Simplified, Life Amplified</h1>
           <p className="mb-8 text-2xl font-medium tracking-wide text-white">
             My E-Doctor, where your health journey transitions from guesswork to precision with just a few clicks. As a signed-in
-            user, simply tell us what's on your mind or pick a test and let our intelligent system suggest the right assessments
-            for your symptoms. Dive into a comprehensive array of tests, from eye exams to specialist referrals, all tailored to
-            your needs and location.
+            user, simply tell us what&#39;s on your mind or pick a test and let our intelligent system suggest the right
+            assessments for your symptoms. Dive into a comprehensive array of tests, from eye exams to specialist referrals, all
+            tailored to your needs and location.
           </p>
           <Button onClick={signIn} className="hover-hov-green h-16 w-[200px] bg-mint-green p-4 text-2xl">
             Get started

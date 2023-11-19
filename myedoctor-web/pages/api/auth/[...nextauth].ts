@@ -49,7 +49,9 @@ export default NextAuth({
       return session;
     },
     async signIn({ user, profile }) {
-      post({ url: `${process.env.API_SERVER_URL}/api/v1/user/create`, body: { userId: profile?.sub, email: user.email } });
+      post({ url: `${process.env.API_SERVER_URL}/api/v1/user/create`, body: { userId: profile?.sub, email: user.email } }).catch(
+        (err) => console.error(err)
+      );
 
       return true;
     },
