@@ -35,6 +35,10 @@ class SnellenTestService:
         # Update test instance
         self.snellen_test_manager.update_test(test_id, test_instance)
 
+        desired_distance_pixels = distance * np.tan(5 / 60 * np.pi / 180 * 11 / test_instance.get_current_level()) * self.screen_dpi 
+
+        return desired_distance_pixels
+
     def send_current_level_results(self, test_id, current_level_results):
         test_instance = self.snellen_test_manager.get_test(test_id)
         desired_characters = test_instance.get_current_level_characters()
