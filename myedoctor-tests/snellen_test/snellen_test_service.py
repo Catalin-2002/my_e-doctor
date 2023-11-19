@@ -4,11 +4,14 @@ from snellen_test.utils import SnellenTestUtils
 from snellen_test.snellen_test_distance_estimator import SnellenDistanceEstimator
 from snellen_test.snellen_test_character_generator import SnellenCharacterGenerator
 
+import numpy as np
+
 class SnellenTestService: 
     def __init__(self):
         self.snellen_test_manager = SnellenTestManager()
         self.snellen_distance_estimator = SnellenDistanceEstimator(65, 600, 100)
         self.snellen_character_generator = SnellenCharacterGenerator(self.snellen_test_manager)
+        self.screen_dpi = 100
 
     def start_test(self, user_id):
         generated_test_id = self.snellen_test_manager.add_test(user_id)
@@ -34,10 +37,8 @@ class SnellenTestService:
         self.snellen_test_manager.update_test(test_id, test_instance)
 
     def send_current_level_results(self, test_id, current_level_results):
-        print('Current level result got: ', current_level_results)
         test_instance = self.snellen_test_manager.get_test(test_id)
         desired_characters = test_instance.get_current_level_characters()
-        print('Desired characters: ', desired_characters)
 
         # Compare the desired characters with the current level results
         # and update the test instance
@@ -68,7 +69,10 @@ class SnellenTestService:
 
     def get_next_level_characters(self, test_id):
         characters = self.snellen_character_generator.generate_characters(test_id)
-        desired_distance = self.snellen_test_manager.get_test(test_id).get_last_camera_frame_distance()
+        desired_distance_cm = self.snellen_test_manager.get_test(test_id).get_last_camera_frame_distance()
+
+        desired_distance_pixels = desired_distance_cm * np.tan(5 / 60 * np.pi / 180 * ) * self.screen_dpi 
+
         return characters, desired_distance
 
     def get_test_results(self, test_id):
