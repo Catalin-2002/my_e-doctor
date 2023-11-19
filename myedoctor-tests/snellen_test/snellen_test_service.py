@@ -28,7 +28,6 @@ class SnellenTestService:
         # Decode the base64 image and create a proper frame
         camera_frame = str(camera_frame)
         camera_frame_image = SnellenTestUtils.decode_base64_image(camera_frame)
-        print(camera_frame_image.shape)
 
         distance = self.snellen_distance_estimator.estimate_user_device_distance(camera_frame_image)
         test_instance.set_last_camera_frame_distance(distance)
@@ -49,23 +48,23 @@ class SnellenTestService:
             if desired_characters[i] == current_level_results[i]:
                 correct_characters += 1
 
-        print ('Correct characters: ', correct_characters, ' out of ', len(desired_characters))
-
         # Have a threshold of 80% to pass the level
         if correct_characters < 0.6 * len(desired_characters) or (correct_characters < 0.85 * len(desired_characters) and test_instance.get_has_previously_failed() == True):
-            return False
+            final_results = test_instance.calculate_final_score()
+            return final_results
         
         if correct_characters < 0.85 * len(desired_characters) :
             desired_characters = desired_characters[:len(desired_characters) - 1]
             test_instance.set_current_level(self.snellen_test_manager.get_test(test_id).get_current_level() - 1)
             test_instance.set_has_previously_failed(True)
-            # Update the test instance 
             self.snellen_test_manager.update_test(test_id, test_instance)
             return None
         
-        print ('Correct characters 2.0: ', correct_characters, ' out of ', len(desired_characters))
-        return True
+        if test_instance.get_current_level() == 11:
+            final_results = test_instance.calculate_final_score()
+            return final_results
         
+        return None
 
     def get_next_level_characters(self, test_id):
         characters = self.snellen_character_generator.generate_characters(test_id)
@@ -76,6 +75,3 @@ class SnellenTestService:
         desired_distance_pixels = desired_distance_cm * np.tan(5 / 60 * np.pi / 180 * 11 / test_level) * self.screen_dpi 
 
         return characters, desired_distance_pixels
-
-    def get_test_results(self, test_id):
-        pass
