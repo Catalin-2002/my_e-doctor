@@ -7,7 +7,7 @@ Welcome to "My E-Doctor", a multifaceted application combining Next.js, Spring B
 
 --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-## **Why "My E-doctor"?**
+## **Why "My E-Doctor"?**
 ## **1.** Innovative Use of Technology: By integrating Next.js, Spring Boot, MongoDB, and Python with Flask, your project showcases a cutting-edge technological stack, appealing to modern tech trends. 
 ## **2.** Seamless authentication and user management using Google or email/password accounts provided by AWS Cognito. 
 ## **3.** Healthcare Meets AI: The combination of healthcare services, like eye vision testing and medical query assistance, with AI technology through the OpenAI API, positions your startup at the intersection of healthcare innovation and AI advancements.
