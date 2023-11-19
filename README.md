@@ -1,3 +1,6 @@
 # unihack2023
 ## **Description**
-Welcome to "My E-Doctor", a comprehensive project integrating various technologies to deliver a robust application. The frontend is built using Next.js, offering a seamless and responsive user interface. The backend, designed for user CRUD operations, is developed using Spring Boot with MongoDB, ensuring efficient data handling and scalability. Additionally, the project employs Python with Flask for advanced eye detection algorithms, showcasing a versatile approach to software development.
+Welcome to "My e-Doctor", a multifaceted application combining Next.js, Spring Boot, MongoDB, and Python with Flask. This project offers users two primary functionalities:
+
+## **1** Eye Vision Testing: Utilizing advanced algorithms, users can test their eye vision, ensuring an interactive and informative experience.
+## **2** Medical Query Assistance: Users can input details about their medical issues, which are then processed using the OpenAI API. Our system provides intelligent responses, leveraging AI to offer helpful insights.
