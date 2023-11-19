@@ -7,13 +7,8 @@ class SnellenTestUtils:
     @staticmethod
     def decode_base64_image(base64_string):
         # Remove the base64 header if present
-
-        print('Got here 0.0')
-
         if ',' in base64_string:
             base64_string = base64_string.split(',')[1]
-
-        print('Got here 1.0')
 
         # Decode the base64 string
         image_data = base64.b64decode(base64_string)

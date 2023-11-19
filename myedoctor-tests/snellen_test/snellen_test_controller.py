@@ -39,26 +39,18 @@ def send_current_level_results():
     current_level_results = request.json.get('currentLevelResults')
 
     try :
-        current_level_results = snellen_test_service.send_current_level_results(test_id, current_level_results)
-        return jsonify({'result', current_level_results}), 200
+        test_results = snellen_test_service.send_current_level_results(test_id, current_level_results)
+        return jsonify({'testResults': test_results}), 200
     except Exception as e:
         return jsonify({'Some error occured when trying to transmit the current level results. Please restart the test and try again.'}), 400
     
 @snellen_test_blueprint.route('/next-level-characters/<test_id>', methods=['GET'])
 @cross_origin()
-def get_next_level_characters(test_id):
+def get_next_level_characters():
+    test_id = request.json.get('testId')
+
     try :
-        print ('test_id', test_id)
         next_level_character, next_level_size = snellen_test_service.get_next_level_characters(test_id)
         return jsonify({'characters': next_level_character, 'testSize': next_level_size}), 200
     except Exception as e:
         return jsonify({'Some error occured when trying to get the next level characters. Please restart the test and try again.'}), 400
-    
-@snellen_test_blueprint.route('/test-results/<test_id>', methods=['GET'])
-@cross_origin()
-def get_test_results(test_id):    
-    try :
-        test_results = snellen_test_service.get_test_results(test_id)
-        return jsonify({'testResult': test_results}), 200
-    except Exception as e:
-        return jsonify({'Some error occured when trying to get the test results. Please restart the test and try again.'}), 400

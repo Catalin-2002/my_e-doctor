@@ -21,9 +21,8 @@ class SnellenCharacterGenerator:
     def generate_random_characters(self, num_characters):
         characters = [chr(random.randint(65, 90)) for _ in range(num_characters)]
         return characters
-
+    
     def generate_characters(self, test_id):
-        print('Got here 1.1')
         current_test_instance = self.snellen_test_manager.get_test(test_id)
         current_test_instance.set_current_level(current_test_instance.get_current_level() + 1)
         number_of_characters = self.level_map[current_test_instance.get_current_level()]
